@@ -107,6 +107,11 @@ android {
     buildConfig true
   }
 
+  // If it doesn't exist
+  if( !prefabHeadersDir.exists() ) {
+    prefabHeadersDir.mkdirs()
+  }
+
   prefab {
     rtngodot {
         headers prefabHeadersDir.absolutePath

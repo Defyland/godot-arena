@@ -1,6 +1,6 @@
 {
     "name": "@borndotcom/react-native-godot",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "summary": "React Native Godot",
     "description": "Embed Godot into React Native apps",
     "main": "lib/commonjs/index",
@@ -118,9 +118,9 @@
         {
             "name": "libgodot",
             "filename": "libgodot.xcframework.zip",
-            "version": "4.5.1.migeran.1",
+            "version": "4.5.1.migeran.2",
             "base_url": "https://github.com/migeran/libgodot/releases/download/",
-            "shasum": "08b8855e16dd76cbb912e30c5c019425bd58e090c7eabc5a630cfb38905bb7fc",
+            "shasum": "699fcc7e3eef7d0aee3132c6ebd7a8a9a7b6b0c9da801d220d72950e4ac79958",
             "destination_base_dir": "ios/libs",
             "env": "LIBGODOT_XCFRAMEWORK_PATH",
             "no_unpack": "false"
@@ -128,9 +128,9 @@
         {
             "name": "libgodot-cpp",
             "filename": "libgodot-cpp.xcframework.zip",
-            "version": "4.5.1.migeran.1",
+            "version": "4.5.1.migeran.2",
             "base_url": "https://github.com/migeran/libgodot/releases/download/",
-            "shasum": "bb8bfa47ed82d057d8ed70d297769ca2960be92dea54377c8740dbb45f5f80e9",
+            "shasum": "be0a070d3e34774b83c2fee315271d0f0a32cfb644cc9f36bf002f17a3fc750c",
             "destination_base_dir": "ios/libs",
             "env": "LIBGODOT_CPP_XCFRAMEWORK_PATH",
             "no_unpack": "false"
@@ -138,9 +138,9 @@
         {
             "name": "libgodot-android",
             "filename": "libgodot-android.zip",
-            "version": "4.5.1.migeran.1",
+            "version": "4.5.1.migeran.2",
             "base_url": "https://github.com/migeran/libgodot/releases/download/",
-            "shasum": "d38b972e8c24f208726e6917f977c29d624e0be2d151e124f5790fbe3ce3fa0d",
+            "shasum": "5ad2b0d836e6a207ca695e690ed833326e6aba35f43a788bf17c15eb33475783",
             "destination_base_dir": "android/libs",
             "env": "LIBGODOT_ANDROID_PATH",
             "no_unpack": "false"
@@ -148,9 +148,9 @@
         {
             "name": "libgodot-cpp-android",
             "filename": "godot-cpp-android.zip",
-            "version": "4.5.1.migeran.1",
+            "version": "4.5.1.migeran.2",
             "base_url": "https://github.com/migeran/libgodot/releases/download/",
-            "shasum": "c2b7a50fd59b4814d78fa4b9c49f38fc147c318960161a9a3a05ded6f383c23c",
+            "shasum": "cdf543419a2397dcdcd25d8266f66cf3200cca3dd1b53c161b1b89e819dab21e",
             "destination_base_dir": "android/libs",
             "env": "LIBGODOT_CPP_ANDROID_PATH",
             "no_unpack": "false"

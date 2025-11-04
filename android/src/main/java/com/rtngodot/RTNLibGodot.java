@@ -141,6 +141,7 @@ public class RTNLibGodot implements IGodotLib, GodotHost, GodotRenderView {
 
 	@Override
 	public void dispatchTouchEvent(int i, int i1, int i2, float[] floats, boolean b) {
+		dispatchTouchEvent("", i, i1, i2, floats, b);
 	}
 
 	@Override

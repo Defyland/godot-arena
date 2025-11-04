@@ -1,8 +1,8 @@
 PODS:
   - boost (1.84.0)
-  - borndotcom-react-native-godot (1.0.0):
+  - borndotcom-react-native-godot (1.0.1):
     - boost
-    - borndotcom-react-native-godot/Common (= 1.0.0)
+    - borndotcom-react-native-godot/Common (= 1.0.1)
     - DoubleConversion
     - fast_float
     - fmt
@@ -29,7 +29,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - borndotcom-react-native-godot/Common (1.0.0):
+  - borndotcom-react-native-godot/Common (1.0.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -2821,7 +2821,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
-  borndotcom-react-native-godot: 373c5d13df73638fb7570444e5894653250742ba
+  borndotcom-react-native-godot: b060f68de77acf4ed80e8072b15315619e14c4c4
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXConstants: a95804601ee4a6aa7800645f9b070d753b1142b3
   Expo: afb036f773fc2935d5ccb7f7a071ff0a2a8b35e6
