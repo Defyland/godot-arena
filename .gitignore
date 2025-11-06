@@ -3,6 +3,7 @@
 /android/src/main/cpp/godot
 /android/generated
 /android/libs
+/android/.settings
 /node_modules
 
 /ios/libs
