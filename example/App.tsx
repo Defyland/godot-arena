@@ -167,41 +167,15 @@ const App = () => {
   };
 
   const MainWindow = ({ navigation }) => {
+    useEffect(() => {
+      // Auto-start the game
+      console.log("Starting Godot...");
+      initGodot("GodotTest");
+    }, []);
+
     return (
-      <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Start 1"
-            onPress={() => {
-              console.log("Starting Godot...");
-              initGodot("GodotTest");
-            }}
-          />
-          <Button
-            title="Start 2"
-            onPress={() => {
-              console.log("Starting Godot...");
-              initGodot("GodotTest2");
-            }}
-          />
-          <Button
-            title="Stop"
-            onPress={() => {
-              destroyGodot();
-            }}
-          />
-          <Button title="Pause" onPress={pauseGodot} />
-          <Button title="Resume" onPress={resumeGodot} />
-          <Button
-            title="Open Window"
-            onPress={() => {
-              navigation.navigate("SubWindow", {});
-            }}
-          />
-        </View>
-        <View style={styles.godotContainer}>
-          <RTNGodotView style={styles.godot} />
-        </View>
+      <View style={styles.fullscreenContainer}>
+        <RTNGodotView style={styles.fullscreenGodot} />
       </View>
     );
   };
@@ -233,7 +207,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainWindow">
-        <Stack.Screen name="MainWindow" component={MainWindow} />
+        <Stack.Screen 
+          name="MainWindow" 
+          component={MainWindow} 
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="SubWindow"
           component={SubWindow}
@@ -291,6 +269,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 0,
     margin: 0,
+  },
+  fullscreenContainer: {
+    flex: 1,
+    backgroundColor: "black",
+  },
+  fullscreenGodot: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
   },
 });
 
