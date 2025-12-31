@@ -1,0 +1,20 @@
+appId: org.reactjs.native.example.GodotTest
+---
+- launchApp
+# Wait for load (dummy swipe)
+- swipe:
+    start: "50%,50%"
+    end: "50%,50%"
+    duration: 2000
+# Tap Single Player (Approx Center-Low)
+- tapOn:
+    point: "50%,65%"
+# Play (Swipe up to move)
+- swipe:
+    start: "50%,50%"
+    end: "50%,20%"
+    duration: 3000
+# Tap Exit (Top Right corner) - Modified for new safe area
+- tapOn:
+    point: "92%,10%"
+

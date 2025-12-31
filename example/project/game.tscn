@@ -1,42 +1,58 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgame123"]
+[gd_scene load_steps=18 format=3 uid="uid://bgame123"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_game"]
 [ext_resource type="PackedScene" uid="uid://bplayer123" path="res://player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://bjoystick123" path="res://joystick.tscn" id="3_joystick"]
+[ext_resource type="PackedScene" uid="uid://bjumpbutton123" path="res://jump_button.tscn" id="4_jumpbutton"]
+[ext_resource type="PackedScene" uid="uid://bpassbutton123" path="res://pass_button.tscn" id="5_passbutton"]
+[ext_resource type="Script" path="res://ai_controller.gd" id="6_ai"]
+[ext_resource type="Theme" uid="uid://btheme123" path="res://mobile_theme.tres" id="7_theme"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_color = Color(0.2, 0.4, 0.25, 1.0)
+albedo_color = Color(0.25, 0.5, 0.25, 1.0)
+roughness = 0.8
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = SubResource("StandardMaterial3D_floor")
-size = Vector2(20, 12)
+size = Vector2(24, 16)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
-size = Vector3(20, 0.1, 12)
+size = Vector3(24, 0.1, 16)
 
 [sub_resource type="Environment" id="Environment_game"]
 background_mode = 1
-background_color = Color(0.3, 0.4, 0.6, 1.0)
+background_color = Color(0.2, 0.6, 0.8, 1.0)
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.6
+ambient_light_color = Color(0.8, 0.8, 0.8, 1.0)
+ambient_light_energy = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
-albedo_color = Color(0.5, 0.3, 0.2, 1.0)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wall_ns"]
-material = SubResource("StandardMaterial3D_wall")
-size = Vector3(20, 2, 0.5)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stands"]
+albedo_color = Color(0.7, 0.4, 0.2, 1.0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wall_ns"]
-size = Vector3(20, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wall_ew"]
-material = SubResource("StandardMaterial3D_wall")
-size = Vector3(0.5, 2, 12)
+size = Vector3(24, 3, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wall_ew"]
-size = Vector3(0.5, 2, 12)
+size = Vector3(1, 3, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_timer_bg"]
+bg_color = Color(0.0, 0.0, 0.0, 0.4)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exit_normal"]
+bg_color = Color(0.8, 0.2, 0.2, 0.8)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exit_pressed"]
+bg_color = Color(0.6, 0.1, 0.1, 0.8)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_game")
@@ -50,52 +66,73 @@ mesh = SubResource("PlaneMesh_floor")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 shape = SubResource("BoxShape3D_floor")
 
-[node name="WallNorth" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+[node name="Stadium" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallNorth"]
-mesh = SubResource("BoxMesh_wall_ns")
+[node name="StandsNorth" type="CSGPolygon3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -8)
+polygon = PackedVector2Array(0, 0, 24, 0, 24, 1, 23, 1, 23, 2, 22, 2, 22, 3, 0, 3)
+depth = 4.0
+material = SubResource("StandardMaterial3D_stands")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallNorth"]
+[node name="StandsSouth" type="CSGPolygon3D" parent="Stadium"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0, 8)
+polygon = PackedVector2Array(0, 0, 24, 0, 24, 1, 23, 1, 23, 2, 22, 2, 22, 3, 0, 3)
+depth = 4.0
+material = SubResource("StandardMaterial3D_stands")
+
+[node name="StandsEast" type="CSGPolygon3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 0, -8)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 1, 15, 1, 15, 2, 14, 2, 14, 3, 0, 3)
+depth = 4.0
+material = SubResource("StandardMaterial3D_stands")
+
+[node name="StandsWest" type="CSGPolygon3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, 8)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 1, 15, 1, 15, 2, 14, 2, 14, 3, 0, 3)
+depth = 4.0
+material = SubResource("StandardMaterial3D_stands")
+
+[node name="CollisionNorth" type="StaticBody3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -8.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stadium/CollisionNorth"]
 shape = SubResource("BoxShape3D_wall_ns")
 
-[node name="WallSouth" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+[node name="CollisionSouth" type="StaticBody3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 8.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallSouth"]
-mesh = SubResource("BoxMesh_wall_ns")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallSouth"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stadium/CollisionSouth"]
 shape = SubResource("BoxShape3D_wall_ns")
 
-[node name="WallEast" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
+[node name="CollisionEast" type="StaticBody3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallEast"]
-mesh = SubResource("BoxMesh_wall_ew")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallEast"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stadium/CollisionEast"]
 shape = SubResource("BoxShape3D_wall_ew")
 
-[node name="WallWest" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
+[node name="CollisionWest" type="StaticBody3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallWest"]
-mesh = SubResource("BoxMesh_wall_ew")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallWest"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stadium/CollisionWest"]
 shape = SubResource("BoxShape3D_wall_ew")
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0)
+
+[node name="Bot" parent="." instance=ExtResource("2_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+
+[node name="AIController" type="Node" parent="Bot"]
+script = ExtResource("6_ai")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 12, 7)
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 16, 10)
 fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 5, 15, 5)
-light_energy = 1.2
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 10, 20, 10)
+light_color = Color(1, 0.95, 0.9, 1.0)
+light_energy = 1.5
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -103,4 +140,114 @@ environment = SubResource("Environment_game")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="TimerPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_timer_bg")
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme = ExtResource("7_theme")
+theme_override_font_sizes/font_size = 56
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="VirtualJoystick" parent="CanvasLayer" instance=ExtResource("3_joystick")]
+
+[node name="JumpButton" parent="CanvasLayer" instance=ExtResource("4_jumpbutton")]
+
+[node name="PassButton" parent="CanvasLayer" instance=ExtResource("5_passbutton")]
+
+[node name="ExitButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 60.0
+offset_right = -60.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme = ExtResource("7_theme")
+theme_override_styles/normal = SubResource("StyleBoxFlat_exit_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_exit_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_exit_pressed")
+theme_override_font_sizes/font_size = 32
+text = "✕"
+
+[node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_theme")
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = -20.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "🔄 RESTART"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "🏠 MENU"
+
+[connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="exit_to_menu"]
+[connection signal="pressed" from="CanvasLayer/GameOverPanel/RestartButton" to="." method="restart_game"]
+[connection signal="pressed" from="CanvasLayer/GameOverPanel/MenuButton" to="." method="exit_to_menu"]
+
+
+

@@ -36,10 +36,6 @@ function initGodot(name) {
 
     if (Platform.OS === "android") {
       RTNGodot.createInstance([
-        // Uncomment and fill in the correct IP address and port for debugging in the Godot Editor.
-        // Check the documentation for the complete procedure.
-        // "--remote-debug",
-        // "tcp://IP_ADDRESS:6007",
         "--verbose",
         "--path",
         "/" + name,

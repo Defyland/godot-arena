@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpassbutton123"]
+
+[ext_resource type="Script" path="res://pass_button.gd" id="1_passbutton"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(1.0, 0.5, 0.0, 0.8)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon"]
+bg_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="PassButton" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_passbutton")
+
+[node name="Button" type="Panel" parent="."]
+custom_minimum_size = Vector2(100, 100)
+offset_left = -350.0
+offset_top = -230.0
+offset_right = -250.0
+offset_bottom = -130.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_button")
+
+[node name="Icon" type="Panel" parent="Button"]
+custom_minimum_size = Vector2(40, 40)
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 70.0
+offset_bottom = 70.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_icon")
+
+[node name="Label" type="Label" parent="Button"]
+offset_left = 10.0
+offset_top = 75.0
+offset_right = 90.0
+offset_bottom = 95.0
+text = "PASS"
+horizontal_alignment = 1
+vertical_alignment = 1
